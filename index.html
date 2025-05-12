@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday to My Best Friend!</title>
-    <style>
+    <style> 
         * {
             margin: 0;
             padding: 0;
@@ -120,7 +120,6 @@
         }
         
         .scroll-text {
-            width: 90%;
             opacity: 0;
             transform: translateY(50px);
             transition: opacity 1s ease, transform 1s ease;
@@ -139,18 +138,91 @@
             transform: translateY(0);
         }
         
-       
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f69d3c;
+            animation: confetti-fall 5s ease-in infinite;
+            z-index: 999;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
         .birthday-cake {
             margin-top: 40px;
             text-align: center;
         }
         
-        footer {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
+ footer {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+footer p:first-child {
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #ffcccb;
+}
+
+/* Sparkle background effect */
+footer::before {
+    content: '';
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    left: 50%;
+    top: 80%;
+    animation: float 4s infinite ease-in-out;
+    clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 85% 22%, 87% 35%, 80% 45%, 50% 75%, 20% 45%, 13% 35%, 15% 22%, 25% 12%, 39% 12%);
+    z-index: 1;
+    opacity: 0.8;
+}
+
+/* Random variations */
+.heart:nth-child(1) { left: 40%; animation-delay: 0s; }
+.heart:nth-child(2) { left: 60%; animation-delay: 1s; }
+.heart:nth-child(3) { left: 50%; animation-delay: 2s; }
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 0.9; }
+    50% { transform: translateY(-40px) scale(1.1); opacity: 1; }
+    100% { transform: translateY(-80px) scale(0.9); opacity: 0; }
+}
+
         
         #section1 { background: linear-gradient(135deg, #FDEB71, #F8D800); }
         #section2 { background: linear-gradient(135deg, #ABDCFF, #0396FF); }
@@ -159,31 +231,52 @@
         #section5 { background: linear-gradient(135deg, #90F7EC, #32CCBC); }
         #section6 { background: linear-gradient(135deg, #FFF6B7, #F6416C); }
 
-
- .cake-slice {
-      display: inline-block;
-      cursor: pointer;
+    p {
+      color: #333;
+      font-size: 1.3rem;
     }
+.sliding-sheet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 10000;
+  background: #000;
+  pointer-events: none;
+}
 
-    .cake-slice:hover {
-      animation: bounce 0.6s ease infinite alternate;
-    }
+.left-sheet, .right-sheet {
+  width: 50%;
+  height: 100%;
+  background: #000;
+}
 
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
-    }
+.left-sheet {
+  animation: slideLeft 2.5s forwards;
+}
 
-    .flame {
-      transform-origin: center;
-      animation: flicker 0.2s infinite alternate;
-    }
+.right-sheet {
+  animation: slideRight 2.5s forwards;
+}
 
-    @keyframes flicker {
-      0% { transform: scale(1) rotate(0deg); opacity: 1; }
-      100% { transform: scale(1.05) rotate(2deg); opacity: 0.85; }
-    }
-        
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes slideRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+.fade-in-content {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+    
     </style>
 </head>
 <body>
@@ -198,26 +291,43 @@
         <a href="#section8">Chapter 8</a>
     </nav>
     
-    <header>
-        
-    <h1>Happy Birthday to My Best Friend!</h1>
-  <p style="font-size: 1.5rem;">Welcome to my world, where I would to celebrate birthday of dearest friend, who's cares is unmeasurable, affection is precious, Journey is an inspiration, Concern for her beloved is unconditional </p>
+    <div class="sliding-sheet" id="slidingSheet">
+  <div class="left-sheet"></div>
+  <div class="right-sheet"></div>
+</div>
+<div id="mainContent" class="fade-in-content">
 
-  <div class="cake-slice">
-    <svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="150" cy="230" rx="100" ry="15" fill="#ddd" />
-      <polygon points="90,70 220,60 200,100 70,110" fill="#f9d6a0" stroke="#cfa76a" stroke-width="1" />
-      <polygon points="70,110 70,180 200,170 200,100" fill="#d4a76a" stroke="#b7854f" stroke-width="1" />
-      <polygon points="220,60 220,130 200,170 200,100" fill="#fce5bc" stroke="#d5b88d" stroke-width="1" />
-      <line x1="70" y1="125" x2="200" y2="115" stroke="#fff" stroke-width="4" />
-      <line x1="70" y1="145" x2="200" y2="135" stroke="#fff" stroke-width="4" />
-      <line x1="70" y1="165" x2="200" y2="155" stroke="#fff" stroke-width="4" />
-      <rect x="140" y="30" width="6" height="40" fill="#ff6b6b" rx="2" />
-      <line x1="140" y1="30" x2="146" y2="70" stroke="white" stroke-dasharray="3,3" />
-      <path class="flame" d="M143 20 Q145 10 140 5 Q135 10 138 18 Q140 22 143 20" fill="#ffcc00" />
-    </svg>
-  </div>
-  </header>
+    <header>
+        <div class="header-content">
+            <h1>Happy Birthday Harshitha</h1>
+            <p style="font-size: 1.5rem;">Welcome to my world, where I would to celebrate birthday of dearest friend, whose care is unmeasurable, affection is precious, journey is an inspiration, concern for her beloved is unconditional.</p>
+            <div class="birthday-cake">
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <!-- Cake base -->
+                    <rect x="50" y="120" width="100" height="60" fill="#A67C52" rx="5" ry="5" />
+                    
+                    <!-- Cake middle layer -->
+                    <rect x="40" y="80" width="120" height="40" fill="#D4A76A" rx="5" ry="5" />
+                    
+                    <!-- Cake top layer -->
+                    <rect x="60" y="50" width="80" height="30" fill="#F9E4B7" rx="5" ry="5" />
+                    
+                    <!-- Candles -->
+                    <rect x="80" y="20" width="5" height="30" fill="#FF6B6B" />
+                    <rect x="100" y="15" width="5" height="35" fill="#4ECDC4" />
+                    <rect x="120" y="20" width="5" height="30" fill="#FFD166" />
+                    
+                    <!-- Flames -->
+                    <ellipse cx="82.5" cy="15" rx="5" ry="8" fill="#FFD166" />
+                    <ellipse cx="102.5" cy="10" rx="5" ry="8" fill="#FF6B6B" />
+                    <ellipse cx="122.5" cy="15" rx="5" ry="8" fill="#4ECDC4" />
+                </svg>
+            </div>
+        </div>
+    </header>
+
+
+    
     
     <section id="section1" class="section">
         <h2 class="chapter-title">Chapter 1: The Smile that Started It All</h2>
@@ -329,8 +439,8 @@
     </section>
     
     <section id="section8" class="section">
-        <h2 class="chapter-title">Chapter 8: Healtfelt Suprise</h2>
-        <div class="scroll-text">
+        <h2 class="chapter-title">Chapter 8: Precious Treasure</h2>
+        <div class="scroll-text"
             <p>On 12th April, I was received a best hand written, with lots of affection from Harshitha.</p>
             <p>I was never written a note, this note is very precious for me.</p>
             <p>It was the day, I felt, I have someone who cares for me too. I felt so happy 😊 .</p>
@@ -356,10 +466,20 @@
         </div>
     </section> 
     
-    <footer>
-        <p>Made with love for the best friend anyone could ask for ❤️</p>
-        <p>© <span id="current-year"></span> | Birthday Celebration's of Best Friend</p>
-    </footer>
+<footer>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+
+    <p>More than a friend, you're family. Your presence is a gift, your friendship a blessing ❤️</p>
+    <p>© <span id="current-year"></span> | Birthday Celebration's of Best Friend</p>
+    <p>© <span id="current-year"></span> <span id="current-date"></span> | Birthday Celebration's of Best Friend |</p>
+</footer>
+
+<script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
+
 
     <script>
         // Update current year
@@ -410,48 +530,79 @@
         
         // Initialize
         handleScrollAnimation();
-        
-        // Create confetti effect
-        function createConfetti() {
-            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#1A535C', '#F9C80E'];
-            
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.animationDelay = Math.random() * 5 + 's';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                document.body.appendChild(confetti);
-                
-                // Remove confetti after animation
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }
-        }
-        
-        // Trigger confetti every 10 seconds
-        setInterval(createConfetti, 10000);
-        createConfetti(); // Initial confetti
-        
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+      // Wait for page to load
+  window.addEventListener('DOMContentLoaded', () => {
+    const curtain = document.getElementById('slidingSheet');
+    const mainContent = document.getElementById('mainContent');
+
+    // Delay showing main content until curtain animation ends
+    setTimeout(() => {
+      curtain.style.display = 'none';
+      mainContent.style.opacity = 1;
+
+      // Start cake layer reveal
+      const layerColors = ['#f9d6a0', '#d4a76a', '#fce5bc', '#ffcdb2', '#deb887', '#f7e7ce'];
+      let currentLayer = 0;
+
+      function addCakeLayer() {
+        if (currentLayer >= layerColors.length) return;
+        const yOffset = 180 - currentLayer * 15;
+        const layer = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        layer.setAttribute("points", `70,${yOffset} 70,${yOffset + 15} 200,${yOffset + 5} 200,${yOffset - 10}`);
+        layer.setAttribute("fill", layerColors[currentLayer]);
+        layer.setAttribute("stroke", "#b7854f");
+        layer.setAttribute("stroke-width", "1");
+        layer.style.opacity = 0;
+        document.getElementById("layers").appendChild(layer);
+        requestAnimationFrame(() => {
+          layer.style.opacity = 1;
         });
-                // Optional: Add some random flicker effect
-        const flames = document.querySelectorAll('.flame');
-        setInterval(() => {
-            flames.forEach(flame => {
-                flame.setAttribute('rx', 4 + Math.random() * 2);
-                flame.setAttribute('ry', 7 + Math.random() * 2);
-            });
-        }, 100);
+        currentLayer++;
+      }
+
+      const revealInterval = setInterval(() => {
+        if (currentLayer >= layerColors.length) {
+          clearInterval(revealInterval);
+        } else {
+          addCakeLayer();
+        }
+      }, 800);
+
+      // Start confetti
+      function createConfetti() {
+        const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#1A535C', '#F9C80E'];
+        for (let i = 0; i < 50; i++) {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.animationDelay = Math.random() * 5 + 's';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 5000);
+        }
+      }
+
+      createConfetti();
+      setInterval(createConfetti, 10000);
+
+      // Animate flames
+      const flames = document.querySelectorAll('.flame');
+      setInterval(() => {
+        flames.forEach(flame => {
+          flame.setAttribute('rx', 4 + Math.random() * 2);
+          flame.setAttribute('ry', 7 + Math.random() * 2);
+        });
+      }, 100);
+
+    }, 2700); // Curtain animation duration
+  });
+   const now = new Date();
+  document.getElementById("current-year").textContent = now.getFullYear();
+  document.getElementById("current-date").textContent = now.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
     </script>
 </body>
 </html>
