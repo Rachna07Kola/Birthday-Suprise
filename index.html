@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday to My Best Friend!</title>
+    <title>Happy Birthday to My Best Friend :)</title>
     <style> 
         * {
             margin: 0;
@@ -321,6 +321,30 @@ footer::before {
         text-align: center;
       }
     }  
+
+
+    .carousel {
+      display: flex;
+      width: fit-content;
+      animation: scroll 30s linear infinite;
+    }
+
+    .carousel img {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      margin-right: 10px;
+      border-radius: 10px;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
     </style>
 </head>
 <body>
@@ -340,6 +364,10 @@ footer::before {
   <div class="right-sheet"></div>
 </div>
 <div id="mainContent" class="fade-in-content">
+
+
+    <audio id="bgm" src="bgm.mp3" autoplay loop></audio>
+
 
     <header>
         <div class="header-content">
@@ -370,7 +398,16 @@ footer::before {
         </div>
     </header>
 
-
+<header>
+  <div class="carousel">
+    <!-- Repeat images for seamless loop -->
+    <img src="https://cdn.corenexis.com/view/?img=d/ma17/1UxF0j.png" alt="1">
+    <img src="https://cdn.corenexis.com/view/?img=d/ma17/0vRpif.png" alt="2">
+    <img src="https://picsum.photos/id/1018/300/200" alt="3">
+    <img src="https://picsum.photos/id/1020/300/200" alt="4">
+    <img src="https://picsum.photos/id/1024/300/200" alt="5">
+  </div>
+</header>
     
     
     <section id="section1" class="section">
@@ -751,6 +788,14 @@ footer::before {
     month: 'long',
     day: 'numeric'
   });
+
+    window.addEventListener("load", () => {
+      const audio = document.getElementById("bgm");
+      audio.volume = 0.4;
+      audio.play().catch(err => {
+        console.warn("Autoplay might be blocked by the browser:", err.message);
+      });
+    });
  
 </script>
 </body>
